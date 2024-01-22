@@ -1,13 +1,22 @@
-require("dotenv").config;
+require("dotenv").config();
 
 const express = require("express");
+
+const rotasClientes = require("./rotas/rotasClientes");
+const rotasEmpresas = require("./rotas/rotasEmpresas");
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", async (req, res) => {
-  return res.json("Olá da api-Porta3000");
-});
+app.use(rotasClientes);
+app.use(rotasEmpresas);
 
-app.listen(3000);
+const PORT = 3000;
+// app.get("/", (req, res) => {
+//   res.send("Servidor conectado");
+// });
+
+app.listen(PORT, () => {
+  console.log(`conectado na porta ${PORT}`);
+});
