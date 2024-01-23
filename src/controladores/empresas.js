@@ -4,13 +4,13 @@ const cadastrarEmpresa = async (req, res) => {
   const { nome, email, senha, cnpj } = req.body;
   
 
-  const verificarCNPJ = await knex("cliente").where({ cpf }).first();
+  const verificarCNPJ = await knex("empresa").where({ cnpj }).first();
 
   if (verificarCNPJ) {
-    return res.status(400).json({ mensagem: "CPF já cadastrado" });
+    return res.status(400).json({ mensagem: "CNPJ já cadastrado" });
   }
   try {
-    const cadastroEmpresa = await knex("cliente")
+    const cadastroEmpresa = await knex("empresa")
       .insert({ nome, email, senha, cnpj })
       .returning("*");
 

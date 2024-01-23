@@ -17,17 +17,19 @@ CREATE TABLE empresa (
   
 CREATE TABLE saques (
   id SERIAL PRIMARY KEY,
-  empresa_id INT NOT NULL REFERENCES empresa(id),
-  cliente_id INT NOT NULL REFERENCES cliente(id),
+  cpf TEXT NOT NULL REFERENCES cliente(cpf),
+  cnpj TEXT NOT NULL REFERENCES empresa(cnpj),
   valor INT NOT NULL,
-  data TIMESTAMP
+  data DATE
   );
   
  CREATE TABLE depositos (
    id SERIAL PRIMARY KEY,
-   empresa_id INT NOT NULL REFERENCES empresa(id),
-   cliente_id INT NOT NULL REFERENCES cliente(id),
+   cpf TEXT NOT NULL REFERENCES cliente(cpf),
+   cnpj TEXT NOT NULL REFERENCES empresa(cnpj),
    valor INT NOT NULL,
-   data TIMESTAMP
+   data DATE
    );
-  
+
+
+ALTER TABLE depositos alter column data type date;
