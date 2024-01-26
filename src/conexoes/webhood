@@ -1,0 +1,34 @@
+// URL do seu webhook
+const webhookUrl = "https://webhook.site/e784c116-d058-4684-8ec8-ff343b5d9937";
+
+// Dados que você deseja enviar no webhook (pode variar dependendo do serviço que está recebendo o webhook)
+const payload = {
+  mensagem: "Olá, Houve uma nova movimentação em sua conta!",
+  outras_informacoes: "Qualquer outra informação que você queira incluir",
+};
+
+// Configuração da requisição
+const requestOptions = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+};
+
+// Enviar a requisição POST com os dados para o webhook
+fetch(webhookUrl, requestOptions)
+  .then((response) => {
+    if (response.ok) {
+      console.log("Webhook enviado com sucesso!");
+    } else {
+      console.error(
+        `Falha ao enviar o webhook. Código de resposta: ${response.status}`
+      );
+    }
+  })
+  .catch((error) => {
+    console.error("Erro ao enviar o webhook:", error);
+  });
+
+  

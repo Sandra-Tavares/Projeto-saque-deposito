@@ -32,7 +32,28 @@ const cadastrarDeposito = async (req, res) => {
     const cadastroDeposito = await knex("depositos")
       .insert({ cpf, cnpj, valor: parseInt(valor), data })
       .returning("*");
-    console.log(cpf, cnpj, valor, data);
+
+    // URL do seu webhook
+    const webhookUrl =
+      "https://webhook.site/e784c116-d058-4684-8ec8-ff343b5d9937";
+
+    // Dados que você deseja enviar no webhook (pode variar dependendo do serviço que está recebendo o webhook)
+    const payload = {
+      nome: "cliente.nome",
+      cpf: "cliente.cpf",
+      depósito: "cliente.deposito",
+      valor: "cliente.deposito.valor",
+      data: "cliente.deposito.data",
+    };
+
+    // Configuração da requisição
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
     return res.status(201).json(cadastroDeposito);
   } catch (error) {
     console.log({ mensagem: error });
