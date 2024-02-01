@@ -3,6 +3,6 @@ const { consultarSaldo } = require("../controladores/saldo");
 
 const rotasSaldo = express();
 
-rotasSaldo.get("/saque", consultarSaldo);
+rotasSaldo.get("/saldo", consultarSaldo);
 
 module.exports = rotasSaldo;
